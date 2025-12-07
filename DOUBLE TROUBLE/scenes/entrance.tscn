@@ -1,0 +1,133 @@
+[gd_scene load_steps=16 format=3 uid="uid://c06egkhk1y61l"]
+
+[ext_resource type="Script" uid="uid://dr1bxed5ii4jp" path="res://scripts/entrance.gd" id="1_ba6v0"]
+[ext_resource type="Texture2D" uid="uid://df3xd44r72c6g" path="res://assets/sprites/_Idle.png" id="2_ba6v0"]
+[ext_resource type="FontFile" uid="uid://dbjl1e6kdxpl6" path="res://assets/fonts/PixelOperator8.ttf" id="3_j8c1m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8c1m"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(0, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aidi3"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(120, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm1gp"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(240, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyrkg"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(360, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dtqe"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(480, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y26w"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(600, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq8y2"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(720, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lin0h"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(840, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eknrl"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(960, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksahx"]
+atlas = ExtResource("2_ba6v0")
+region = Rect2(1080, 0, 120, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ncymu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8c1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aidi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm1gp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyrkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dtqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y26w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq8y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lin0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eknrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksahx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ba6v0"]
+size = Vector2(16, 32)
+
+[node name="Entrance" type="Area2D"]
+script = ExtResource("1_ba6v0")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4.999999, -33)
+scale = Vector2(0.9895833, 0.8125)
+sprite_frames = SubResource("SpriteFrames_ncymu")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.1724699
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_ba6v0")
+
+[node name="Label_NotEnough" type="Label" parent="."]
+visible = false
+offset_left = -139.0
+offset_top = -64.0
+offset_right = 142.0
+offset_bottom = -34.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_j8c1m")
+theme_override_font_sizes/font_size = 8
+text = "Wanna fight me?
+You must have 
+12 cards first"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label_Ready" type="Label" parent="."]
+visible = false
+offset_left = -143.0
+offset_top = -64.0
+offset_right = 138.0
+offset_bottom = -34.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_j8c1m")
+theme_override_font_sizes/font_size = 8
+text = "Good Job for
+finding 12
+cards let's fight"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

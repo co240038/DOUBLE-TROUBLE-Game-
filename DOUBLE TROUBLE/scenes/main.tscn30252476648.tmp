@@ -1,0 +1,167 @@
+[gd_scene load_steps=13 format=3 uid="uid://m5p0uowfioes"]
+
+[ext_resource type="PackedScene" uid="uid://dxpu3ha62j2id" path="res://Scenes/card_manager.tscn" id="1_kry3j"]
+[ext_resource type="PackedScene" uid="uid://b1w32y4agp66b" path="res://Scenes/card_slot.tscn" id="2_21xkr"]
+[ext_resource type="PackedScene" uid="uid://c5yse6yyxtqqn" path="res://Scenes/player_hand.tscn" id="3_6bp64"]
+[ext_resource type="Script" uid="uid://dec1pqj0a8d75" path="res://Script/deck.gd" id="5_344ge"]
+[ext_resource type="Texture2D" uid="uid://bmy3wiamn5dom" path="res://CARD BACK.png" id="5_d1ilt"]
+[ext_resource type="Texture2D" uid="uid://b4d00f6us1sgy" path="res://Card Images/Deck.png" id="5_hptm8"]
+[ext_resource type="Script" uid="uid://bxv11b6lqlvss" path="res://Script/input_manager.gd" id="5_ynf5e"]
+[ext_resource type="FontVariation" uid="uid://croha27crh82f" path="res://ButtonFont.tres" id="6_21xkr"]
+[ext_resource type="Script" uid="uid://ys0gllwkir6k" path="res://Scenes/Battle_System.gd" id="7_6bp64"]
+[ext_resource type="Script" uid="uid://de3gfjja3ebph" path="res://Script/opponent_deck.gd" id="8_hptm8"]
+[ext_resource type="Script" uid="uid://dxvtng6avpp0j" path="res://Script/opponent_hand.gd" id="10_d1ilt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
+size = Vector2(138, 202)
+
+[node name="Main" type="Node2D"]
+
+[node name="CardManager" parent="." instance=ExtResource("1_kry3j")]
+
+[node name="CardSlotPlayer" parent="." instance=ExtResource("2_21xkr")]
+position = Vector2(865, 741)
+
+[node name="PlayerHand" parent="." instance=ExtResource("3_6bp64")]
+
+[node name="Deck" type="Node2D" parent="."]
+position = Vector2(150, 890)
+script = ExtResource("5_344ge")
+
+[node name="Sprite2D" type="Sprite2D" parent="Deck"]
+z_index = -2
+scale = Vector2(0.142057, 0.15092249)
+texture = ExtResource("5_d1ilt")
+
+[node name="Area2D" type="Area2D" parent="Deck"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck/Area2D"]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_272bh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Deck"]
+modulate = Color(0, 0, 0, 1)
+z_index = -2
+offset_left = -20.0
+offset_top = -19.5
+offset_right = 20.0
+offset_bottom = 20.5
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputManager" type="Node2D" parent="."]
+script = ExtResource("5_ynf5e")
+
+[node name="BattleSystem" type="Node" parent="."]
+script = ExtResource("7_6bp64")
+
+[node name="CardSlotOppenent" parent="." instance=ExtResource("2_21xkr")]
+position = Vector2(871, 282)
+
+[node name="CastButton" type="Button" parent="."]
+offset_left = 960.0
+offset_top = 670.0
+offset_right = 1070.0
+offset_bottom = 734.0
+theme_override_fonts/font = ExtResource("6_21xkr")
+theme_override_font_sizes/font_size = 32
+text = "CAST"
+icon_alignment = 1
+
+[node name="BattleTimer" type="Timer" parent="."]
+
+[node name="OpponentHand" type="Node2D" parent="."]
+script = ExtResource("10_d1ilt")
+
+[node name="OppenentDeck" type="Node2D" parent="."]
+script = ExtResource("8_hptm8")
+
+[node name="Deck" type="Node2D" parent="OppenentDeck"]
+position = Vector2(1780, 125)
+
+[node name="Sprite2D" type="Sprite2D" parent="OppenentDeck/Deck"]
+z_index = -2
+scale = Vector2(0.6166667, 0.5358491)
+texture = ExtResource("5_hptm8")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="OppenentDeck/Deck"]
+modulate = Color(0, 0, 0, 1)
+z_index = -2
+offset_left = -20.0
+offset_top = -19.5
+offset_right = 20.0
+offset_bottom = 20.5
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player_Mana" type="RichTextLabel" parent="."]
+modulate = Color(0.2509804, 0.7529412, 1, 1)
+offset_left = 720.0
+offset_top = 664.0
+offset_right = 738.75
+offset_bottom = 687.75
+scale = Vector2(4, 4)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Opponent_Health" type="RichTextLabel" parent="."]
+modulate = Color(0.4862745, 0, 0.08235294, 1)
+offset_left = 1710.0
+offset_top = 186.0
+offset_right = 1746.5
+offset_bottom = 222.75
+scale = Vector2(4, 4)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Opponent_Mana" type="RichTextLabel" parent="."]
+modulate = Color(0.2509804, 0.7529412, 1, 1)
+offset_left = 720.0
+offset_top = 249.0
+offset_right = 740.25
+offset_bottom = 275.0
+scale = Vector2(4, 4)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player_Health" type="RichTextLabel" parent="."]
+modulate = Color(0.050980393, 0.8627451, 0.050980393, 1)
+offset_left = 82.0
+offset_top = 693.0
+offset_right = 119.0
+offset_bottom = 725.75
+scale = Vector2(4, 4)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player_Block" type="RichTextLabel" parent="."]
+modulate = Color(0.19650194, 0.19650194, 0.19650194, 1)
+offset_left = 812.0
+offset_top = 542.0
+offset_right = 837.25
+offset_bottom = 568.0
+scale = Vector2(4, 4)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Opponent_Block" type="RichTextLabel" parent="."]
+modulate = Color(0.19607843, 0.19607843, 0.19607843, 1)
+offset_left = 820.0
+offset_top = 371.0
+offset_right = 840.75
+offset_bottom = 394.0
+scale = Vector2(4, 4)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CastButton" to="BattleSystem" method="_on_button_pressed"]
